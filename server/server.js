@@ -19,7 +19,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1', PostRoute);
 
-
+app.get('/',(req,res)=>{
+    res.send({
+        activeStatus:true,
+        error:false,
+    })
+})
 
 app.listen(8000, () => {
     console.log("Server is listening on port http://localhost:8000");
