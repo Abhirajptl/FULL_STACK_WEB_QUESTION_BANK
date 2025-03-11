@@ -9,7 +9,7 @@ const SinglePost = () => {
     const [editedPost, setEditedPost] = useState({});  // Store edited data
     const { postID } = useParams();
     const navigate = useNavigate();
-    const url = import.meta.env.VITE_SERVER_URL;
+    const url = import.meta.env.REACT_APP_SERVER_URL;
 
     // Load post details
     const loadPosts = async () => {

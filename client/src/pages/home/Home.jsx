@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const Home = ({ searchQuery }) => {
     const [posts, setPosts] = useState([]);
-    const url = import.meta.env.VITE_SERVER_URL;
+    const url = import.meta.env.REACT_APP_SERVER_URL;
     
     const loadPosts = async () => {
         try {

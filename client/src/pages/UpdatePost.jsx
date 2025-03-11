@@ -5,7 +5,7 @@ import axios from 'axios';
 const UpdatePost = () => {
     const { postID } = useParams();
     const navigate = useNavigate();
-    const url = import.meta.env.VITE_SERVER_URL;
+    const url = import.meta.env.REACT_APP_SERVER_URL;
 
     // State for storing post details
     const [post, setPost] = useState({
