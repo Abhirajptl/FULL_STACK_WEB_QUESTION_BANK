@@ -4,15 +4,17 @@ import Card from './Card';
 import axios from 'axios';
 
 const Home = ({ searchQuery }) => {
-    const [posts, setPosts] = useState([]);
-    const url = import.meta.env.REACT_APP_SERVER_URL;
+    const [posts, setPosts] = useState([]); // ✅ Always initialize as an empty array
+    const url = import.meta.env.VITE_SERVER_URL; // ✅ Fix environment variable access
     
     const loadPosts = async () => {
         try {
-            const response = await axios.get(`${url}/getposts`);
-            setPosts(response.data.responseData);
+            const response = await axios.get(`${url}/api/v1/getposts`);
+            const data = response.data.responseData; // ✅ Extract data safely
+            setPosts(Array.isArray(data) ? data : []); // ✅ Ensure it's an array
         } catch (error) {
-            console.error(error);
+            console.error("Error fetching posts:", error);
+            setPosts([]); // ✅ Prevent undefined issues
         }
     };
 
@@ -20,9 +22,9 @@ const Home = ({ searchQuery }) => {
         loadPosts();
     }, []);
 
-    // **Filter posts based on searchQuery**
-    const filteredPosts = posts.filter((post) =>
-        post.topic.toLowerCase().includes(searchQuery.toLowerCase())
+    // ✅ Fix: Ensure posts is always an array before filtering
+    const filteredPosts = (posts || []).filter((post) =>
+        post?.topic?.toLowerCase()?.includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -37,4 +39,3 @@ const Home = ({ searchQuery }) => {
 };
 
 export default Home;
-
